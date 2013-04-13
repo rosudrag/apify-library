@@ -41,7 +41,7 @@ class QuestionsController extends Controller
         
         $model = $this->getModel('Question');
         $QuestionID = $request->getParam('QuestionID');
-        $question = is_numeric($QuestionID) ? $model->find($QuestionID) : $model->findBy(array('Question'=>$Question));
+        $question = is_numeric($QuestionID) ? $model->findId($QuestionID, 'QuestionID') : $model->findBy(array('Question'=>$Question));
         if (! $question) {
             throw new Exception('Question not found', Response::NOT_FOUND);
         }
