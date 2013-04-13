@@ -57,4 +57,11 @@ $routes[] = new Route('/domains',
 	)
 );
 
+$routes[] = new Route('/tests',
+	array(
+	'controller' => 'tests',
+	'action' => 'index'
+	)
+);
+
 return $routes;
