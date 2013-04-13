@@ -287,7 +287,7 @@ class Model
                 return $this->updateId($entity, $idDef);
             }
         } catch (Exception $e) {
-            throw new ModelException($e->getMessage());
+            throw new ModelException($e->getMessage() . "save error");
         }
     }
     
