@@ -452,7 +452,7 @@ class Model
      * @param int $id
      * @return int Returns the number of rows affected by the query
      */
-    public function delete($id, $idDef)
+    public function deleteId($id, $idDef)
     {
         $sql = 'DELETE FROM `' . $this->table . '`'
             . ' WHERE '. $idDef . ' = ?';
