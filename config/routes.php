@@ -112,6 +112,5 @@ $routes[] = new Route('/questions/:id/:action',
     )
 );
 
-);
 
 return $routes;
