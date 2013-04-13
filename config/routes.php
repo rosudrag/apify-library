@@ -43,4 +43,11 @@ $routes[] = new Route('/users',
     )
 );
 
+$routes[] = new Route('/fbusers',
+	array(
+	'controller' => 'fbusers',
+	'action' => 'index'
+	)
+);
+
 return $routes;
