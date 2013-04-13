@@ -20,7 +20,7 @@ class DomainsController extends Controller
             $response = new Response();
         }
         
-        $response->users = $this->getModel('Domain')->findAll();
+        $response->domains = $this->getModel('Domain')->findAll();
         return $response;
     }
     
