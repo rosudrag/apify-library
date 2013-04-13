@@ -20,7 +20,7 @@ class FbusersController extends Controller
             $response = new Response();
         }
         
-        $response->users = $this->getModel('User')->findAll();
+        $response->users = $this->getModel('Fbuser')->findAll();
         return $response;
     }
     
@@ -39,7 +39,7 @@ class FbusersController extends Controller
         // serve HTML, JSON and XML
         $request->acceptContentTypes(array('html', 'json', 'xml'));
         
-        $model = $this->getModel('User');
+        $model = $this->getModel('Fbuser');
         $id = $request->getParam('id');
         $user = is_numeric($id) ? $model->find($id) : $model->findBy(array('username'=>$id));
         if (! $user) {
@@ -84,7 +84,7 @@ class FbusersController extends Controller
             throw new Exception($e->getMessage(), Response::OK);
         }
         
-        $id = $this->getModel('User')->save($user);
+        $id = $this->getModel('Fbuser')->save($user);
         if (! is_numeric($id)) {
             throw new Exception('An error occurred while creating user', Response::OK);
         }
@@ -113,7 +113,7 @@ class FbusersController extends Controller
         
         $id = $request->getParam('id');
         
-        $model = $this->getModel('User');
+        $model = $this->getModel('Fbuser');
         $user = $model->find($id);
         if (! $user) {
             throw new Exception('User not found', Response::NOT_FOUND);
@@ -143,7 +143,7 @@ class FbusersController extends Controller
         $request->acceptContentTypes(array('json'));
         
         $id = $request->getParam('id');
-        $model = $this->getModel('User');
+        $model = $this->getModel('Fbuser');
         $user = $model->find($id);
         if (! $user) {
             throw new Exception('User not found', Response::NOT_FOUND);
