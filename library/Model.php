@@ -165,6 +165,19 @@ class Model
             throw new ModelException($e->getMessage());
         }
     }
+
+    public function findId($id, $idDef)
+    {
+        $sql = 'SELECT * FROM `' . $this->table . '` WHERE ' . $idDef . ' = ?';
+        
+        try {
+            $stmt = $this->execute($sql, array((int)$id));
+            $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $this->entity);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            throw new ModelException($e->getMessage());
+        }
+    }
     
     /**
      * @param array $condition
