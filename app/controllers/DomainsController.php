@@ -1,5 +1,5 @@
 <?php
-class UsersController extends Controller
+class FbusersController extends Controller
 {
     /**
      * @route GET /?method=users
@@ -20,7 +20,7 @@ class UsersController extends Controller
             $response = new Response();
         }
         
-        $response->users = $this->getModel('Domain')->findAll();
+        $response->users = $this->getModel('Fbuser')->findAll();
         return $response;
     }
     
@@ -39,11 +39,11 @@ class UsersController extends Controller
         // serve HTML, JSON and XML
         $request->acceptContentTypes(array('html', 'json', 'xml'));
         
-        $model = $this->getModel('Domain');
+        $model = $this->getModel('Fbuser');
         $id = $request->getParam('id');
         $user = is_numeric($id) ? $model->find($id) : $model->findBy(array('username'=>$id));
         if (! $user) {
-            throw new Exception('Domain not found', Response::NOT_FOUND);
+            throw new Exception('User not found', Response::NOT_FOUND);
         }
         
         if ('html' == $request->getContentType()) {
@@ -51,7 +51,7 @@ class UsersController extends Controller
             $response->setLayout('main');
         } else {
             $response = new Response();
-            $response->setEtagHeader(md5('/domains/' . $user->id));
+            $response->setEtagHeader(md5('/users/' . $user->id));
         }
         
         $response->user = $user; 
@@ -74,21 +74,23 @@ class UsersController extends Controller
         }
         
         try {
-            $user = new Domain(array(
-                'name'     => $request->getPost('name')
+            $user = new User(array(
+                'name'     => $request->getPost('name'),
+                'username' => $request->getPost('login'), 
+                'email'    => $request->getPost('email'), 
             ));
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
         }
         
-        $id = $this->getModel('Domain')->save($user);
+        $id = $this->getModel('Fbuser')->save($user);
         if (! is_numeric($id)) {
-            throw new Exception('An error occurred while creating domain', Response::OK);
+            throw new Exception('An error occurred while creating user', Response::OK);
         }
         
         $response = new Response();
         $response->setCode(Response::CREATED);
-        $response->setEtagHeader(md5('/domains/' . $id));
+        $response->setEtagHeader(md5('/users/' . $id));
         
         return $response;
     }
@@ -108,16 +110,16 @@ class UsersController extends Controller
             throw new Exception('HTTP method not supported', Response::NOT_ALLOWED);
         }        
         
-        $id = $request->getParam('domainID');
+        $id = $request->getParam('id');
         
-        $model = $this->getModel('Domain');
+        $model = $this->getModel('Fbuser');
         $user = $model->find($id);
         if (! $user) {
-            throw new Exception('Domain not found', Response::NOT_FOUND);
+            throw new Exception('User not found', Response::NOT_FOUND);
         }
         
         try {
-            $user->name = $request->getPost('name');            
+            $user->username = $request->getPost('username');            
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
         }
@@ -139,11 +141,11 @@ class UsersController extends Controller
     {
         $request->acceptContentTypes(array('json'));
         
-        $id = $request->getParam('domainID');
-        $model = $this->getModel('Domain');
+        $id = $request->getParam('id');
+        $model = $this->getModel('Fbuser');
         $user = $model->find($id);
         if (! $user) {
-            throw new Exception('Domain not found', Response::NOT_FOUND);
+            throw new Exception('User not found', Response::NOT_FOUND);
         }
         $model->delete($user->id);
         
