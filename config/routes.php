@@ -57,13 +57,6 @@ $routes[] = new Route('/domains',
 	)
 );
 
-$routes[] = new Route('/domains/create',
-	array(
-	'controller' => 'domains',
-	'action' => 'create'
-	)
-);
-
 $routes[] = new Route('/domains/:id', 
     array(
         'controller' => 'domains',
@@ -81,17 +74,17 @@ $routes[] = new Route('/domains/:id/:action',
     )
 );
 
+$routes[] = new Route('/domains/create',
+	array(
+	'controller' => 'domains',
+	'action' => 'create'
+	)
+);
+
 $routes[] = new Route('/questions',
 	array(
 	'controller' => 'questions',
 	'action' => 'index'
-	)
-);
-
-$routes[] = new Route('/questions/create',
-	array(
-	'controller' => 'questions',
-	'action' => 'create'
 	)
 );
 
@@ -110,6 +103,13 @@ $routes[] = new Route('/questions/:id/:action',
         'action'     => '(show|update|destroy)',
         'page'       => '\d+'
     )
+);
+
+$routes[] = new Route('/questions/create',
+	array(
+	'controller' => 'questions',
+	'action' => 'create'
+	)
 );
 
 
