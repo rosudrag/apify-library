@@ -1,0 +1,26 @@
+<h1>Questions</h1>
+
+<table>
+    <tbody>
+        <tr>
+            <td><strong>QuestionID</strong></td>
+            <td><strong>UploaderID</strong></td>
+		<td><strong>Question</strong></td>
+		<td><strong>Difficulty</strong></td>
+		<td><strong>Rank</strong></td>
+		<td><strong>created</strong></td>
+
+        </tr>
+        <?php foreach ($view->domains as $domain): ?>
+        <tr>
+            <td><?php echo $domain->DomainID ?></td>
+            <td><?php echo $domain->DomainName ?></td>
+            <td><?php echo $domain->Question ?></td>
+            <td><?php echo $domain->Difficulty ?></td>
+            <td><?php echo $domain->Rank ?></td>
+            <td><?php echo $domain->created ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+

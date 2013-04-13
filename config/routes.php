@@ -64,9 +64,9 @@ $routes[] = new Route('/domains/create',
 	)
 );
 
-$routes[] = new Route('/tests',
+$routes[] = new Route('/questions',
 	array(
-	'controller' => 'tests',
+	'controller' => 'questions',
 	'action' => 'index'
 	)
 );
