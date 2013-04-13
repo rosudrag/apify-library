@@ -2,8 +2,8 @@
 class QuestionsController extends Controller
 {
     /**
-     * @route GET /?method=domains
-     * @route GET /domains
+     * @route GET /?method=questions
+     * @route GET /questions
      * 
      * @param Request $request
      * @return Response|View
@@ -25,10 +25,10 @@ class QuestionsController extends Controller
     }
     
     /**
-     * @route GET /?method=domains.show&id=1
-     * @route GET /?method=domains.show&id=matt
-     * @route GET /domains/1
-     * @route GET /domains/matt
+     * @route GET /?method=questions.show&id=1
+     * @route GET /?method=questions.show&id=matt
+     * @route GET /questions/1
+     * @route GET /questions/matt
      * 
      * @param Request $request
      * @return Response|View
@@ -59,8 +59,8 @@ class QuestionsController extends Controller
     }
 
     /**
-     * @route POST /?method=domains.create&format=json
-     * @route POST /domains/create.json
+     * @route POST /?method=questions.create&format=json
+     * @route POST /questions/create.json
      * 
      * @param Request $request
      * @return Response
@@ -94,8 +94,8 @@ class QuestionsController extends Controller
     }
 
     /**
-     * @route POST /?method=domains.update&id=1&format=json
-     * @route POST /domains/1/update.json
+     * @route POST /?method=questions.update&id=1&format=json
+     * @route POST /questions/1/update.json
      * 
      * @param Request $request
      * @return Response
@@ -128,8 +128,8 @@ class QuestionsController extends Controller
     }
     
     /**
-     * @route GET /?method=domains.destroy&id=1&format=json
-     * @route GET /domains/1/destroy.json
+     * @route GET /?method=questions.destroy&id=1&format=json
+     * @route GET /questions/1/destroy.json
      * 
      * @param Request $request
      * @return Response
