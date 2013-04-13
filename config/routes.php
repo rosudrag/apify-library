@@ -64,6 +64,23 @@ $routes[] = new Route('/domains/create',
 	)
 );
 
+$routes[] = new Route('/domains/:id', 
+    array(
+        'controller' => 'domains',
+        'action'     => 'show'
+    )
+);
+
+$routes[] = new Route('/domains/:id/:action', 
+    array(
+        'controller' => 'domains'
+    ),
+    array(
+        'action'     => '(show|update|destroy)',
+        'page'       => '\d+'
+    )
+);
+
 $routes[] = new Route('/questions',
 	array(
 	'controller' => 'questions',
