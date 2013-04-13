@@ -75,13 +75,13 @@ class DomainsController extends Controller
         
         try {
             $domain = new Domain(array(
-                'DomainName'     => $request->getPost('domainname'),
+                'DomainName'     => $request->getPost('DomainName'),
             ));
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
         }
         
-        $DomainID = $this->getModel('Domain')->save($domain);
+        $DomainID = $this->getModel('Domain')->save($domain, 'DomainID');
         if (! is_numeric($DomainID)) {
             throw new Exception('An error occurred while creating domain', Response::OK);
         }

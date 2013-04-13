@@ -272,6 +272,24 @@ class Model
             throw new ModelException($e->getMessage());
         }
     }
+
+    /**
+     * @param Entity $entity
+     * @return mixed
+     * @throws ModelException
+     */
+    public function saveId(Entity $entity, $idDef)
+    {
+        try {
+            if (null === $entity->id) {
+                return $this->insertId($entity, $idDef);
+            } else {
+                return $this->updateId($entity, $idDef);
+            }
+        } catch (Exception $e) {
+            throw new ModelException($e->getMessage());
+        }
+    }
     
     /**
      * @param Entity $entity
@@ -281,6 +299,41 @@ class Model
     {
         $vars = $entity->toArray();
         unset($vars['id']);
+        
+        if (array_key_exists('created_at', $vars)) {
+            $vars['created_at'] = date('Y-m-d H:i:s');
+        }
+        if (array_key_exists('updated_at', $vars)) {
+            $vars['updated_at'] = date('Y-m-d H:i:s');
+        }
+        
+        $columns = '';
+        $tokens = '';
+        $values = array();
+        foreach ($vars as $key => $value) {
+            $columns .= '`' . $key . '`,';
+            $tokens .= '?,';
+            $values[] = $value;
+        }
+        
+        $sql = 'INSERT INTO ' . $this->table 
+            . ' (' . rtrim($columns, ',') . ')'
+            . ' VALUES' 
+            . ' (' . rtrim($tokens, ',') . ')'; 
+        
+        $stmt = $this->execute($sql, $values);        
+        return ($stmt instanceof PDOStatement) ? $this->db->lastInsertId(): false;
+    }
+
+
+    /**
+     * @param Entity $entity
+     * @return int Returns the ID of the last inserted row
+     */
+    public function insertId(Entity $entity, $idDef)
+    {
+        $vars = $entity->toArray();
+        unset($vars[$idDef]);
         
         if (array_key_exists('created_at', $vars)) {
             $vars['created_at'] = date('Y-m-d H:i:s');
@@ -341,6 +394,41 @@ class Model
         $stmt = $this->execute($sql, $values);
         return ($stmt instanceof PDOStatement) ? $stmt->rowCount() : false;
     }
+
+    /**
+     * @param Entity $entity
+     * @return int Returns the number of rows affected by the query 
+     */
+    public function updateId(Entity $entity, $idDef)
+    {
+        $vars = $entity->toArray();
+        unset($vars[$idDef], $vars['created_at']);
+        
+        if (array_key_exists('updated_at', $vars)) {
+            $vars['updated_at'] = date('Y-m-d H:i:s');
+            $entity->addUpdated('updated_at');
+        }
+        
+        $updatedColumns = $entity->getUpdated();
+        if (count($updatedColumns) <= 0) {
+            return false;
+        }
+        $entity->resetUpdated();
+
+        $columns = '';
+        $values = array();
+        foreach ($updatedColumns as $column) {
+            $columns .= '`' . $column . '` = ?,';
+            $values[] = $vars[$column];
+        }
+        
+        $sql = 'UPDATE ' . $this->table 
+            . ' SET ' . rtrim($columns, ',')
+            . ' WHERE ' . $idDef . ' = ' . $entity->id;
+        
+        $stmt = $this->execute($sql, $values);
+        return ($stmt instanceof PDOStatement) ? $stmt->rowCount() : false;
+    }
     
     /**
      * @param int $id
@@ -350,6 +438,24 @@ class Model
     {
         $sql = 'DELETE FROM `' . $this->table . '`'
             . ' WHERE id = ?';
+        
+        try {
+            $stmt = $this->execute($sql, array((int)$id));
+        } catch (Exception $e) {
+            throw new ModelException($e->getMessage());
+        }
+        
+        return ($stmt instanceof PDOStatement) ? $stmt->rowCount() : false;
+    }
+
+    /**
+     * @param int $id
+     * @return int Returns the number of rows affected by the query
+     */
+    public function delete($id, $idDef)
+    {
+        $sql = 'DELETE FROM `' . $this->table . '`'
+            . ' WHERE '. $idDef . ' = ?';
         
         try {
             $stmt = $this->execute($sql, array((int)$id));
