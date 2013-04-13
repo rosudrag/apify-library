@@ -9,15 +9,15 @@ class Domain extends Entity
     protected $created;
 
  
-    public function setDomainID($value)
+    public function setQuestionID($value)
     {
-	$this->DomainID = $value;
+	$this->QuestionID = $value;
     }
     
 
-    public function setDomainName($value)
+    public function setQuestion($value)
     {
-        $this->DomainName = $value;
+        $this->Question = $value;
     }
     
 
