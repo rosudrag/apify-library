@@ -1,8 +1,26 @@
 <?php
-class Domain extends Entity
+class Fbuser extends Entity
 {
-    protected $domainID;
+    protected $id;
     protected $name;
+    protected $domainID;
+    protected $email;
+    protected $username;
+    protected $login;
+    protected $password;
+    protected $name = '';
+    protected $gender = '';
+    protected $updated_at;
+    protected $created_at;
+    
+    // validate username (optional)
+    public function setUsername($value)
+    {
+        if (preg_match('/[^a-z0-9\-_.]/i', $filename)) {
+            throw new ValidationException('Invalid username');
+        }
+        $this->username = $value;
+    }
     
     // sanitize and validate name (optional) 
     public function setName($value)
@@ -14,5 +32,13 @@ class Domain extends Entity
         $this->name = $value;
     }
     
-
+    // validate email (optional)
+    public function setEmail($value)
+    {
+        if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            throw new ValidationException('Invalid email address');
+        }
+        $this->email = $value;
+    }
+    
 }
