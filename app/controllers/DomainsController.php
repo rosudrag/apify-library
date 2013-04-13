@@ -1,6 +1,16 @@
 <?php
 class DomainsController extends Controller
 {
+
+    public function init($request)
+    {
+        if (! $request->hasParam('DomainName')) {
+            // throwing or returning an Exception terminates the dispatch loop
+            throw new Exception('Missing parameter: DomainName', Response::FORBIDDEN);
+        }
+    }
+
+
     /**
      * @route GET /?method=domains
      * @route GET /domains
