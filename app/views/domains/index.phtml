@@ -6,10 +6,10 @@
             <td><strong>ID</strong></td>
             <td><strong>Name</strong></td>
         </tr>
-        <?php foreach ($view->users as $user): ?>
+        <?php foreach ($view->domains as $domain): ?>
         <tr>
-            <td><?php echo $user->DomainID ?></td>
-            <td><?php echo $user->DomainName ?></td>
+            <td><?php echo $domain->DomainID ?></td>
+            <td><?php echo $domain->DomainName ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
