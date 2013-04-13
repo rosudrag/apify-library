@@ -33,6 +33,14 @@ class Domain extends Entity
         }
         $this->name = $value;
     }
+    public function setDomainName($value)
+    {
+        $value = htmlspecialchars(trim($value), ENT_QUOTES);
+        if (empty($value) || strlen($value) < 3) {
+            throw new ValidationException('Invalid name');
+        }
+        $this->DomainName = $value;
+    }
     
     // validate email (optional)
     public function setEmail($value)
