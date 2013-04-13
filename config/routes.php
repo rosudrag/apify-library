@@ -86,6 +86,31 @@ $routes[] = new Route('/questions',
 	'controller' => 'questions',
 	'action' => 'index'
 	)
+
+$routes[] = new Route('/questions/create',
+	array(
+	'controller' => 'questions',
+	'action' => 'create'
+	)
+);
+
+$routes[] = new Route('/questions/:id', 
+    array(
+        'controller' => 'questions',
+        'action'     => 'show'
+    )
+);
+
+$routes[] = new Route('/questions/:id/:action', 
+    array(
+        'controller' => 'questions'
+    ),
+    array(
+        'action'     => '(show|update|destroy)',
+        'page'       => '\d+'
+    )
+);
+
 );
 
 return $routes;
