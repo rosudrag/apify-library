@@ -40,8 +40,8 @@ class DomainsController extends Controller
         $request->acceptContentTypes(array('html', 'json', 'xml'));
         
         $model = $this->getModel('Domain');
-        $id = $request->getParam('id');
-        $user = is_numeric($id) ? $model->find($id) : $model->findBy(array('name'=>$id));
+        $id = $request->getParam('DomainID');
+        $user = is_numeric($id) ? $model->find($id) : $model->findBy(array('DomainName'=>$id));
         if (! $user) {
             throw new Exception('Domain not found', Response::NOT_FOUND);
         }
@@ -75,7 +75,7 @@ class DomainsController extends Controller
         
         try {
             $user = new User(array(
-                'name'     => $request->getPost('name'),
+                'DomainName'     => $request->getPost('DomainName'),
             ));
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
@@ -83,7 +83,7 @@ class DomainsController extends Controller
         
         $id = $this->getModel('Domain')->save($user);
         if (! is_numeric($id)) {
-            throw new Exception('An error occurred while creating user', Response::OK);
+            throw new Exception('An error occurred while creating domain', Response::OK);
         }
         
         $response = new Response();
@@ -108,16 +108,16 @@ class DomainsController extends Controller
             throw new Exception('HTTP method not supported', Response::NOT_ALLOWED);
         }        
         
-        $id = $request->getParam('id');
+        $id = $request->getParam('DomainID');
         
         $model = $this->getModel('Domain');
         $user = $model->find($id);
         if (! $user) {
-            throw new Exception('User not found', Response::NOT_FOUND);
+            throw new Exception('Domain not found', Response::NOT_FOUND);
         }
         
         try {
-            $user->username = $request->getPost('name');            
+            $user->username = $request->getPost('DomainName');            
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
         }
@@ -139,11 +139,11 @@ class DomainsController extends Controller
     {
         $request->acceptContentTypes(array('json'));
         
-        $id = $request->getParam('id');
+        $id = $request->getParam('DomainID');
         $model = $this->getModel('Domain');
         $user = $model->find($id);
         if (! $user) {
-            throw new Exception('User not found', Response::NOT_FOUND);
+            throw new Exception('Domain not found', Response::NOT_FOUND);
         }
         $model->delete($user->id);
         

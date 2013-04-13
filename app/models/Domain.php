@@ -3,7 +3,10 @@ class Domain extends Entity
 {
     protected $id;
     protected $name;
-    protected $domainID;
+
+    protected $DomainID;
+    protected $DomainName;
+
     protected $email;
     protected $username;
     protected $login;
