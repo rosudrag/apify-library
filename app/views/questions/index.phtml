@@ -11,14 +11,14 @@
 		<td><strong>created</strong></td>
 
         </tr>
-        <?php foreach ($view->domains as $domain): ?>
+        <?php foreach ($view->questions as $question): ?>
         <tr>
-            <td><?php echo $domain->QuestionID ?></td>
-            <td><?php echo $domain->UploaderID ?></td>
-            <td><?php echo $domain->Question ?></td>
-            <td><?php echo $domain->Difficulty ?></td>
-            <td><?php echo $domain->Rank ?></td>
-            <td><?php echo $domain->created ?></td>
+            <td><?php echo $question->QuestionID ?></td>
+            <td><?php echo $question->UploaderID ?></td>
+            <td><?php echo $question->Question ?></td>
+            <td><?php echo $question->Difficulty ?></td>
+            <td><?php echo $question->Rank ?></td>
+            <td><?php echo $question->created ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
