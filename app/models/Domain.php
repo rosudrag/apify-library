@@ -1,55 +1,21 @@
 <?php
 class Domain extends Entity
 {
-    protected $id;
-    protected $name;
-
     protected $DomainID;
     protected $DomainName;
 
-    protected $email;
-    protected $username;
-    protected $login;
-    protected $password;
-    protected $gender = '';
-    protected $updated_at;
-    protected $created_at;
-    
-    // validate username (optional)
-    public function setUsername($value)
-    {
-        if (preg_match('/[^a-z0-9\-_.]/i', $filename)) {
-            throw new ValidationException('Invalid username');
-        }
-        $this->username = $value;
-    }
-
+ 
     public function setDomainID($value)
     {
 	$this->DomainID = $value;
     }
     
-    // sanitize and validate name (optional) 
-    public function setName($value)
-    {
-        $value = htmlspecialchars(trim($value), ENT_QUOTES);
-        if (empty($value) || strlen($value) < 3) {
-            throw new ValidationException('Invalid name');
-        }
-        $this->name = $value;
-    }
+
     public function setDomainName($value)
     {
         $this->DomainName = $value;
     }
     
-    // validate email (optional)
-    public function setEmail($value)
-    {
-        if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new ValidationException('Invalid email address');
-        }
-        $this->email = $value;
-    }
+
     
 }
