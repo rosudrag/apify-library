@@ -40,7 +40,7 @@ class QuestionsController extends Controller
         $request->acceptContentTypes(array('html', 'json', 'xml'));
         
         $model = $this->getModel('Question');
-        $QuestionID = $request->getParam('QuestionID');
+        $QuestionID = $request->getParam('id');
         $question = is_numeric($QuestionID) ? $model->findId($QuestionID, 'QuestionID') : $model->findBy(array('Question'=>$Question));
         if (! $question) {
             throw new Exception('Question not found', Response::NOT_FOUND);
