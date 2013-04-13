@@ -86,6 +86,7 @@ $routes[] = new Route('/questions',
 	'controller' => 'questions',
 	'action' => 'index'
 	)
+);
 
 $routes[] = new Route('/questions/create',
 	array(
