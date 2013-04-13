@@ -51,10 +51,10 @@ class DomainsController extends Controller
             $response->setLayout('main');
         } else {
             $response = new Response();
-            $response->setEtagHeader(md5('/domains/' . $domain->id));
+            $response->setEtagHeader(md5('/domains/' . $domain->DomainID));
         }
         
-        $response->domain = $domain; 
+        $response->domains = $domain; 
         return $response;
     }
 
