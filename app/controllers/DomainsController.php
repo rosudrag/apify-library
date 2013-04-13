@@ -2,8 +2,8 @@
 class DomainsController extends Controller
 {
     /**
-     * @route GET /?method=users
-     * @route GET /users
+     * @route GET /?method=domains
+     * @route GET /domains
      * 
      * @param Request $request
      * @return Response|View
@@ -25,10 +25,10 @@ class DomainsController extends Controller
     }
     
     /**
-     * @route GET /?method=users.show&id=1
-     * @route GET /?method=users.show&id=matt
-     * @route GET /users/1
-     * @route GET /users/matt
+     * @route GET /?method=domains.show&id=1
+     * @route GET /?method=domains.show&id=matt
+     * @route GET /domains/1
+     * @route GET /domains/matt
      * 
      * @param Request $request
      * @return Response|View
@@ -41,8 +41,8 @@ class DomainsController extends Controller
         
         $model = $this->getModel('Domain');
         $id = $request->getParam('DomainID');
-        $user = is_numeric($id) ? $model->find($id) : $model->findBy(array('DomainName'=>$id));
-        if (! $user) {
+        $domain = is_numeric($id) ? $model->find($id) : $model->findBy(array('DomainName'=>$id));
+        if (! $domain) {
             throw new Exception('Domain not found', Response::NOT_FOUND);
         }
         
@@ -51,16 +51,16 @@ class DomainsController extends Controller
             $response->setLayout('main');
         } else {
             $response = new Response();
-            $response->setEtagHeader(md5('/domains/' . $user->id));
+            $response->setEtagHeader(md5('/domains/' . $domain->id));
         }
         
-        $response->user = $user; 
+        $response->domain = $domain; 
         return $response;
     }
 
     /**
-     * @route POST /?method=users.create&format=json
-     * @route POST /users/create.json
+     * @route POST /?method=domains.create&format=json
+     * @route POST /domains/create.json
      * 
      * @param Request $request
      * @return Response
@@ -74,14 +74,14 @@ class DomainsController extends Controller
         }
         
         try {
-            $user = new User(array(
+            $domain = new Domain(array(
                 'DomainName'     => $request->getPost('DomainName'),
             ));
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
         }
         
-        $id = $this->getModel('Domain')->save($user);
+        $id = $this->getModel('Domain')->save($domain);
         if (! is_numeric($id)) {
             throw new Exception('An error occurred while creating domain', Response::OK);
         }
@@ -94,8 +94,8 @@ class DomainsController extends Controller
     }
 
     /**
-     * @route POST /?method=users.update&id=1&format=json
-     * @route POST /users/1/update.json
+     * @route POST /?method=domains.update&id=1&format=json
+     * @route POST /domains/1/update.json
      * 
      * @param Request $request
      * @return Response
@@ -111,25 +111,25 @@ class DomainsController extends Controller
         $id = $request->getParam('DomainID');
         
         $model = $this->getModel('Domain');
-        $user = $model->find($id);
-        if (! $user) {
+        $domain = $model->find($id);
+        if (! $domain) {
             throw new Exception('Domain not found', Response::NOT_FOUND);
         }
         
         try {
-            $user->username = $request->getPost('DomainName');            
+            $domain->DomainName = $request->getPost('DomainName');            
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
         }
-        $model->save($user);
+        $model->save($domain);
         
         // return 200 OK
         return new Response();
     }
     
     /**
-     * @route GET /?method=users.destroy&id=1&format=json
-     * @route GET /users/1/destroy.json
+     * @route GET /?method=domains.destroy&id=1&format=json
+     * @route GET /domains/1/destroy.json
      * 
      * @param Request $request
      * @return Response
@@ -141,11 +141,11 @@ class DomainsController extends Controller
         
         $id = $request->getParam('DomainID');
         $model = $this->getModel('Domain');
-        $user = $model->find($id);
-        if (! $user) {
+        $domain = $model->find($id);
+        if (! $domain) {
             throw new Exception('Domain not found', Response::NOT_FOUND);
         }
-        $model->delete($user->id);
+        $model->delete($domain->id);
         
         // return 200 OK
         return new Response();
