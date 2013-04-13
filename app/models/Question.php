@@ -3,7 +3,7 @@ class Domain extends Entity
 {
     protected $QuestionID;
     protected $UserID;
-    protected $Question = '';
+    protected $Question;
     protected $Difficulty;
     protected $Rank;
     protected $created;
