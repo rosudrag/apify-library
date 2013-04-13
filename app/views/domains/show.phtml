@@ -3,12 +3,21 @@
 <table>
 <tr>
   <td width="120px"><strong>ID</strong></td>
-  <td><?php echo $view->user->domainID ?></td>
+  <td><?php echo $view->user->id ?></td>
 </tr>
 
 <tr>
   <td width="120px"><strong>Username</strong></td>
+  <td><?php echo $view->user->username ?></td>
+</tr>
+
+<tr>
+  <td width="120px"><strong>Name</strong></td>
   <td><?php echo $view->user->name ?></td>
 </tr>
 
+<tr>
+  <td width="120px"><strong>Email</strong></td>
+  <td><?php echo $view->user->email ?></td>
+</tr>
 </table>
