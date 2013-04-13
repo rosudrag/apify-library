@@ -20,7 +20,7 @@ class UsersController extends Controller
             $response = new Response();
         }
         
-        $response->users = $this->getModel('Field')->findAll();
+        $response->users = $this->getModel('Domain')->findAll();
         return $response;
     }
     
@@ -83,7 +83,7 @@ class UsersController extends Controller
         
         $id = $this->getModel('Domain')->save($user);
         if (! is_numeric($id)) {
-            throw new Exception('An error occurred while creating user', Response::OK);
+            throw new Exception('An error occurred while creating domain', Response::OK);
         }
         
         $response = new Response();
@@ -113,7 +113,7 @@ class UsersController extends Controller
         $model = $this->getModel('Domain');
         $user = $model->find($id);
         if (! $user) {
-            throw new Exception('User not found', Response::NOT_FOUND);
+            throw new Exception('Domain not found', Response::NOT_FOUND);
         }
         
         try {
