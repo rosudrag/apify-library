@@ -10,10 +10,10 @@ if (DEBUG) {
 }
 
 // Information required to connect to the database
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'apify');
-define('DB_USER', 'root');
-define('DB_PASS', 'root');
+define('DB_HOST', 'mysql-mastermerit.j.layershift.co.uk');
+define('DB_NAME', 'meritmaster');
+define('DB_USER', 'mmview');
+define('DB_PASS', '7AmjYU2FY4THMJz4');
 
 // Default timezone used by all date/time functions
 date_default_timezone_set('Europe/London');
