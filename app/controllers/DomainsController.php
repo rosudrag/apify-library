@@ -68,7 +68,7 @@ class DomainsController extends Controller
      */
     public function createAction($request)
     {
-        $request->acceptContentTypes(array('json'));
+        
         if ('POST' != $request->getMethod()) {
             throw new Exception('HTTP method not allowed', Response::NOT_ALLOWED);
         }
