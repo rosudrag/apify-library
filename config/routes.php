@@ -64,14 +64,14 @@ $routes[] = new Route('/domains/create',
 	)
 );
 
-$routes[] = new Route('/domains/:id', 
+$routes[] = new Route('/domains/:domainid', 
     array(
         'controller' => 'domains',
         'action'     => 'show'
     )
 );
 
-$routes[] = new Route('/domains/:id/:action', 
+$routes[] = new Route('/domains/:domainid/:action', 
     array(
         'controller' => 'domains'
     ),
