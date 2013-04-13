@@ -50,4 +50,11 @@ $routes[] = new Route('/fbusers',
 	)
 );
 
+$routes[] = new Route('/fields',
+	array(
+	'controller' => 'fields',
+	'action' => 'index'
+	)
+);
+
 return $routes;

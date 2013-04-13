@@ -1,0 +1,19 @@
+<h1>Users</h1>
+
+<table>
+    <tbody>
+        <tr>
+            <td><strong>ID</strong></td>
+            <td><strong>Domain</strong></td>
+            <td><strong>Name</strong></td>
+            <td><strong>Email</strong></td>
+        </tr>
+        <?php foreach ($view->users as $user): ?>
+        <tr>
+            <td><?php echo $user->domainID ?></td>
+            <td><?php echo $user->name ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
