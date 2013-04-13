@@ -76,9 +76,8 @@ class FbusersController extends Controller
         try {
             $user = new User(array(
                 'name'     => $request->getPost('name'),
-                'username' => $request->getPost('username'), 
+                'username' => $request->getPost('login'), 
                 'email'    => $request->getPost('email'), 
-                'gender'   => $request->getPost('gender')
             ));
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);

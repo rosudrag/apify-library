@@ -4,6 +4,7 @@ class Fbuser extends Entity
     protected $id;
     protected $email;
     protected $username;
+    protected $login;
     protected $password;
     protected $name = '';
     protected $gender = '';
