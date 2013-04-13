@@ -54,7 +54,7 @@ class QuestionsController extends Controller
             $response->setEtagHeader(md5('/questions/' . $question->id));
         }
         
-        $response->question = $question; 
+        $response->questions = $question; 
         return $response;
     }
 
