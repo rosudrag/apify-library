@@ -1,5 +1,5 @@
 <?php
-class Fbuser extends Entity
+class Domain extends Entity
 {
     protected $id;
     protected $name;

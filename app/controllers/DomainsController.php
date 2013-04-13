@@ -1,5 +1,5 @@
 <?php
-class FbusersController extends Controller
+class DomainsController extends Controller
 {
     /**
      * @route GET /?method=users
@@ -20,7 +20,7 @@ class FbusersController extends Controller
             $response = new Response();
         }
         
-        $response->users = $this->getModel('Fbuser')->findAll();
+        $response->users = $this->getModel('Domain')->findAll();
         return $response;
     }
     
@@ -39,11 +39,11 @@ class FbusersController extends Controller
         // serve HTML, JSON and XML
         $request->acceptContentTypes(array('html', 'json', 'xml'));
         
-        $model = $this->getModel('Fbuser');
+        $model = $this->getModel('Domain');
         $id = $request->getParam('id');
-        $user = is_numeric($id) ? $model->find($id) : $model->findBy(array('username'=>$id));
+        $user = is_numeric($id) ? $model->find($id) : $model->findBy(array('name'=>$id));
         if (! $user) {
-            throw new Exception('User not found', Response::NOT_FOUND);
+            throw new Exception('Domain not found', Response::NOT_FOUND);
         }
         
         if ('html' == $request->getContentType()) {
@@ -51,7 +51,7 @@ class FbusersController extends Controller
             $response->setLayout('main');
         } else {
             $response = new Response();
-            $response->setEtagHeader(md5('/users/' . $user->id));
+            $response->setEtagHeader(md5('/domains/' . $user->id));
         }
         
         $response->user = $user; 
@@ -76,21 +76,19 @@ class FbusersController extends Controller
         try {
             $user = new User(array(
                 'name'     => $request->getPost('name'),
-                'username' => $request->getPost('login'), 
-                'email'    => $request->getPost('email'), 
             ));
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
         }
         
-        $id = $this->getModel('Fbuser')->save($user);
+        $id = $this->getModel('Domain')->save($user);
         if (! is_numeric($id)) {
             throw new Exception('An error occurred while creating user', Response::OK);
         }
         
         $response = new Response();
         $response->setCode(Response::CREATED);
-        $response->setEtagHeader(md5('/users/' . $id));
+        $response->setEtagHeader(md5('/domains/' . $id));
         
         return $response;
     }
@@ -112,14 +110,14 @@ class FbusersController extends Controller
         
         $id = $request->getParam('id');
         
-        $model = $this->getModel('Fbuser');
+        $model = $this->getModel('Domain');
         $user = $model->find($id);
         if (! $user) {
             throw new Exception('User not found', Response::NOT_FOUND);
         }
         
         try {
-            $user->username = $request->getPost('username');            
+            $user->username = $request->getPost('name');            
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
         }
@@ -142,7 +140,7 @@ class FbusersController extends Controller
         $request->acceptContentTypes(array('json'));
         
         $id = $request->getParam('id');
-        $model = $this->getModel('Fbuser');
+        $model = $this->getModel('Domain');
         $user = $model->find($id);
         if (! $user) {
             throw new Exception('User not found', Response::NOT_FOUND);
