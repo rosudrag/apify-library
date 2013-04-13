@@ -37,7 +37,7 @@ class Domain extends Entity
     {
         $value = htmlspecialchars(trim($value), ENT_QUOTES);
         if (empty($value) || strlen($value) < 3) {
-            throw new ValidationException('Invalid name');
+            throw new ValidationException('Invalid DomainName');
         }
         $this->DomainName = $value;
     }
