@@ -75,8 +75,8 @@ class DomainsController extends Controller
         
         try {
             $domain = new Domain(array(
-		'DomainID' => $request->getPost('DomainID'),
-                'DomainName'     => $request->getPost('DomainName'),
+		'DomainID' => 5,
+                'DomainName'     => 'Jack',
             ));
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
