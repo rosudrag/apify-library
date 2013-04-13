@@ -8,7 +8,6 @@ class Domain extends Entity
     protected $username;
     protected $login;
     protected $password;
-    protected $name = '';
     protected $gender = '';
     protected $updated_at;
     protected $created_at;
