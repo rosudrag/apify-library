@@ -40,7 +40,7 @@ class DomainsController extends Controller
         $request->acceptContentTypes(array('html', 'json', 'xml'));
         
         $model = $this->getModel('Domain');
-        $DomainID = $request->getParam('DomainID');
+        $DomainID = $request->getParam('id');
         $domain = is_numeric($DomainID) ? $model->find($DomainID) : $model->findBy(array('DomainName'=>$DomainID));
         if (! $domain) {
             throw new Exception('Domain not found', Response::NOT_FOUND);
