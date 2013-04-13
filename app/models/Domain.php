@@ -23,6 +23,11 @@ class Domain extends Entity
         }
         $this->username = $value;
     }
+
+    public function setDomainID($value)
+    {
+	$this->DomainID = $value;
+    }
     
     // sanitize and validate name (optional) 
     public function setName($value)
@@ -35,10 +40,6 @@ class Domain extends Entity
     }
     public function setDomainName($value)
     {
-        $value = htmlspecialchars(trim($value), ENT_QUOTES);
-        if (empty($value) || strlen($value) < 3) {
-            throw new ValidationException('Invalid DomainName');
-        }
         $this->DomainName = $value;
     }
     
