@@ -40,8 +40,8 @@ class DomainsController extends Controller
         $request->acceptContentTypes(array('html', 'json', 'xml'));
         
         $model = $this->getModel('Domain');
-        $id = $request->getParam('DomainID');
-        $domain = is_numeric($id) ? $model->find($id) : $model->findBy(array('DomainName'=>$id));
+        $DomainID = $request->getParam('DomainID');
+        $domain = is_numeric($DomainID) ? $model->find($DomainID) : $model->findBy(array('DomainName'=>$DomainID));
         if (! $domain) {
             throw new Exception('Domain not found', Response::NOT_FOUND);
         }
@@ -81,14 +81,14 @@ class DomainsController extends Controller
             throw new Exception($e->getMessage(), Response::OK);
         }
         
-        $id = $this->getModel('Domain')->save($domain);
-        if (! is_numeric($id)) {
+        $DomainID = $this->getModel('Domain')->save($domain);
+        if (! is_numeric($DomainID)) {
             throw new Exception('An error occurred while creating domain', Response::OK);
         }
         
         $response = new Response();
         $response->setCode(Response::CREATED);
-        $response->setEtagHeader(md5('/domains/' . $id));
+        $response->setEtagHeader(md5('/domains/' . $DomainID));
         
         return $response;
     }
@@ -108,10 +108,10 @@ class DomainsController extends Controller
             throw new Exception('HTTP method not supported', Response::NOT_ALLOWED);
         }        
         
-        $id = $request->getParam('DomainID');
+        $DomainID = $request->getParam('DomainID');
         
         $model = $this->getModel('Domain');
-        $domain = $model->find($id);
+        $domain = $model->find($DomainID);
         if (! $domain) {
             throw new Exception('Domain not found', Response::NOT_FOUND);
         }
@@ -139,9 +139,9 @@ class DomainsController extends Controller
     {
         $request->acceptContentTypes(array('json'));
         
-        $id = $request->getParam('DomainID');
+        $DomainID = $request->getParam('DomainID');
         $model = $this->getModel('Domain');
-        $domain = $model->find($id);
+        $domain = $model->find($DomainID);
         if (! $domain) {
             throw new Exception('Domain not found', Response::NOT_FOUND);
         }
