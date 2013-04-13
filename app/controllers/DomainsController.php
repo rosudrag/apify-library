@@ -78,7 +78,7 @@ class DomainsController extends Controller
                 'DomainName'     => $request->getPost('DomainName'),
             ));
         } catch (ValidationException $e) {
-            throw new Exception($e->getMessage() + 'some error', Response::OK);
+            throw new Exception($e->getMessage(), Response::OK);
         }
         
         $id = $this->getModel('Domain')->save($domain);
