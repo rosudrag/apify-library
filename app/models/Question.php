@@ -1,5 +1,5 @@
 <?php
-class Domain extends Entity
+class Question extends Entity
 {
     protected $QuestionID;
     protected $UserID;
