@@ -105,10 +105,17 @@ $routes[] = new Route('/questions/:id/:action',
     )
 );
 
-$routes[] = new Route('/questions/create',
+$routes[] = new Route('/questions/create/:question',
 	array(
 	'controller' => 'questions',
 	'action' => 'create'
+	)
+);
+
+$routes[] = new Route('/questionchoices/:id',
+	array(
+	'controller' => 'questionchoices',
+	'action' => 'index'
 	)
 );
 

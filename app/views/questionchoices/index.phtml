@@ -1,0 +1,29 @@
+<h1>Questions</h1>
+
+    protected $ChoiceID;
+    protected $QuestionID;
+    protected $IsRightChoice;
+    protected $Choice;
+    protected $Answer;
+
+<table>
+    <tbody>
+        <tr>
+            <td><strong>ChoiceID</strong></td>
+            <td><strong>QuestionID</strong></td>
+		<td><strong>IsRightChoice</strong></td>
+		<td><strong>Choice</strong></td>
+		<td><strong>Answer</strong></td>
+        </tr>
+        <?php foreach ($view->questionchoices as $questionchoice): ?>
+        <tr>
+            <td><?php echo $questionchoice->ChoiceID ?></td>
+            <td><?php echo $questionchoice->QuestionID ?></td>
+            <td><?php echo $questionchoice->IsRightChoice ?></td>
+            <td><?php echo $questionchoice->Choice ?></td>
+            <td><?php echo $questionchoice->Answer ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
