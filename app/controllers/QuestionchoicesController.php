@@ -21,7 +21,7 @@ class QuestionchoicesController extends Controller
             $response = new Response();
         }
         
-        $response->questions = $this->getModel('QuestionChoice')->findAll();
+        $response->questionchoices = $this->getModel('QuestionChoice')->findAll();
         return $response;
     }
     
