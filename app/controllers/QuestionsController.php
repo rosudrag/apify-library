@@ -92,6 +92,19 @@ class QuestionsController extends Controller
         return $response;
     }
 
+    public function saveId(Entity $entity, $idDef)
+    {
+        try {
+            if (null === $entity->id) {
+                return $this->insertId($entity, $idDef);
+            } else {
+                return $this->updateId($entity, $idDef);
+            }
+        } catch (Exception $e) {
+            throw new ModelException($e->getMessage() . "save error");
+        }
+    }m
+
     /**
      * @route POST /?method=questions.update&id=1&format=json
      * @route POST /questions/1/update.json
