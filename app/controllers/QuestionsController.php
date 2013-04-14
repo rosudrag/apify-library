@@ -51,7 +51,7 @@ class QuestionsController extends Controller
             $response->setLayout('main');
         } else {
             $response = new Response();
-            $response->setEtagHeader(md5('/questions/' . $question->id));
+            $response->setEtagHeader(md5('/questions/' . $question->QuestionID));
         }
         
         $response->questions = $question; 
