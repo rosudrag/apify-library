@@ -1,5 +1,5 @@
 <?php
-class QuestionChoicesController extends Controller
+class QuestionchoicesController extends Controller
 {
     /**
      * @route GET /?method=questions
