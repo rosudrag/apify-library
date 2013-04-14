@@ -80,7 +80,7 @@ class QuestionsController extends Controller
             throw new Exception($e->getMessage(), Response::OK);
         }
         
-        $QuestionID = $this->getModel('Question')->save($question);
+        $QuestionID = $this->getModel('Question')->saveId($question, 'QuestionID');
         if (! is_numeric($QuestionID)) {
             throw new Exception('An error occurred while creating question', Response::OK);
         }
