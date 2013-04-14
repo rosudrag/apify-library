@@ -68,14 +68,13 @@ class QuestionsController extends Controller
      */
     public function createAction($request)
     {
-        $request->acceptContentTypes(array('json'));
         if ('POST' != $request->getMethod()) {
             throw new Exception('HTTP method not allowed', Response::NOT_ALLOWED);
         }
         
         try {
             $question = new Question(array(
-                'Question'     => $request->getPost('Question'),
+                'Question'     => $request->getParam('question'),
             ));
         } catch (ValidationException $e) {
             throw new Exception($e->getMessage(), Response::OK);
